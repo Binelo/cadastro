@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:include="layout :: head"></head>
+
+<body>
+  <nav th:replace="layout :: menu"></nav>
+  <main class="container">
+    <a href="/vendas/novo" class="btn btn-primary">Novo</a>
+    <table class="table" id="tabvendas">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Comprador</th>
+          <th>Data da compra:</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="umaVenda : ${listaVendas}">
+          <td th:text="${umaVenda.id}"></td>
+          <td th:text="${umaVenda.comprador?.nome}"></td>
+          <td th:if="${umaVenda.data}" th:text="${#dates.format(umaVenda.data, 'dd/MM/yyyy')}"></td>
+          <td th:unless="${umaVenda.data}">Não informada</td>
+          <td th:text="${#aggregates.sum(umaVenda.colItens.![getValorFinal])}"></td>
+
+          <td>
+            <a th:href="@{'/vendas/alterar/' + ${umaVenda.id}}" class="btn btn-warning">Alterar</a>
+            <button class="btn btn-danger js-delete" th:data-id="${umaVenda.id}">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+  <div class="modal" tabindex="-1" id="modalvenda">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Excluir Venda</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Confirma a exclusão da Venda?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="btnnao" data-bs-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-primary" id="btnsim">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer th:include="layout :: footer"></footer>
+  <script th:src="@{/script.js}"></script>
+</body>
+
+</html>

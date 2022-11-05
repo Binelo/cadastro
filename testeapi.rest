@@ -1,0 +1,45 @@
+### Retorna todos os objetos do cliente
+get http://localhost:8080/api/v1/clientes
+
+### retornaum único objeto cliente pelo id
+get http://localhost:8080/api/v1/clientes/1
+
+get http://localhost:8080/api/v1/clientes/nome/ze
+
+get http://localhost:8080/api/v1/clientes/nome/ze
+
+get http://localhost:8080/api/v1/clientes/?nome=ze
+
+###
+post http://localhost:8080/api/v1/clientes
+Content-Type: application/json
+
+{
+    "nome": "Tio Patinhas",
+    "endereco": "Rua lululu 700",
+    "sexo": "Masculino",
+    "dataNascimento": "2022-10-27",
+    "cidadeResidencia": {
+        "id": 2
+    }
+    
+}
+
+###
+put http://localhost:8080/api/v1/clientes/3
+Content-Type: application/json
+
+{
+    "nome": "Tio Patinhas da Silva Sauro",
+    "endereco": "Rua lululu 700",
+    "sexo": "Masculino",
+    "dataNascimento": "2022-10-27",
+    "cidadeResidencia": {
+        "id": 2
+    }
+    
+}
+
+###
+DELETE  http://localhost:8080/api/v1/clientes/3
+
