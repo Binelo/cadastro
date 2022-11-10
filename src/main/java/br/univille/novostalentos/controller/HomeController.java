@@ -13,7 +13,6 @@ public class HomeController {
     private int contador;
 
     @GetMapping
-    // @ResponseBody
     public ModelAndView index() {
         // return "eu nao acredito... java é lindo ❤";
         contador++;
